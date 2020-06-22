@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-
 public class AppConfig {
 	
 	@Bean // managed object - one that's created by Spring
@@ -15,8 +14,8 @@ public class AppConfig {
 	}
 	
 	@Bean // bean 2
-	public String message2() {
-		return "Electric boogaloo";
+	public String message2(String message) {
+		return message + "Electric boogaloo";
 	}
 
 }

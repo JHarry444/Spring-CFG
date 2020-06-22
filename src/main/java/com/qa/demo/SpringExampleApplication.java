@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import com.qa.demo.config.AppConfig;
+import com.qa.demo.persistence.domain.Flower;
+import com.qa.demo.persistence.repo.FlowerRepo;
+
 @SpringBootApplication
 public class SpringExampleApplication {
 
@@ -29,7 +33,12 @@ public class SpringExampleApplication {
 //		beans.add(config.message());
 //		beans.add(config.message2());
 //		System.out.println(beans);
-	
+		
+		System.out.println(beanBag.getBean(AppConfig.class));
+		
+		FlowerRepo flowerDAO = beanBag.getBean(FlowerRepo.class);
+		flowerDAO.save(new Flower("rose", 15, "red", 44.94, false));
+		System.out.println(flowerDAO.findByType("rose"));
 	}
 	
 }
