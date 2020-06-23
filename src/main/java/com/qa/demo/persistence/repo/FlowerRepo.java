@@ -10,5 +10,6 @@ import com.qa.demo.persistence.domain.Flower;
 @Repository
 public interface FlowerRepo extends JpaRepository<Flower, Long>{
 
+	// SELECT * FROM flower WHERE flower.type = type;
 	List<Flower> findByType(String type);
 }
