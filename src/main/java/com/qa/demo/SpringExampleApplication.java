@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import com.qa.demo.config.AppConfig;
 import com.qa.demo.persistence.domain.Flower;
 import com.qa.demo.persistence.repo.FlowerRepo;
+import com.qa.demo.service.FlowerService;
 
 @SpringBootApplication
 public class SpringExampleApplication {
@@ -17,6 +18,8 @@ public class SpringExampleApplication {
 	public static void main(String[] args) {
 		ApplicationContext beanBag = SpringApplication.run(SpringExampleApplication.class, args);
 		
+		FlowerService service = beanBag.getBean(FlowerService.class);
+		System.out.println(service);
 		String message = new String("Hello, World!");
 		System.out.println("Mine: " + message);
 		
