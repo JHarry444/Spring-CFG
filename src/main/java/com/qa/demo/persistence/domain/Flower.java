@@ -5,9 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
+// ORM - Object Relational Mapper
 @Entity(name = "flower")
 public class Flower {
+	
+	// INSERT INTO flower  (type, colour...) VALUES ('rose', 'red');
+	
+	// INSERT  INTO <CLASS NAME> VALUES (flower.getType() , flower,getColour());
 
 	@Id // PK
 	@GeneratedValue // AI
@@ -16,6 +22,7 @@ public class Flower {
 	@Column(name = "type", length = 60, unique = false)
 	private String type;
 
+	@Size(min = 0, max = 20)
 	private int height;
 
 	@Column(nullable = false)

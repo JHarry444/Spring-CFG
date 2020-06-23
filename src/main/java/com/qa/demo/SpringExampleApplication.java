@@ -1,5 +1,8 @@
 package com.qa.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -27,12 +30,11 @@ public class SpringExampleApplication {
 		
 		System.out.println(beanBag.getBean("message2", String.class));
 	
-//		List<String> beans = new ArrayList<>();	
-//		AppConfig config = new AppConfig();
-//		beans.add(config.message());
-//		beans.add(config.message());
-//		beans.add(config.message2());
-//		System.out.println(beans);
+		List<String> beans = new ArrayList<>();	
+		AppConfig config = new AppConfig();
+		beans.add(config.message());
+		beans.add(config.message2(config.message()));
+		System.out.println(beans);
 		
 		System.out.println(beanBag.getBean(AppConfig.class));
 		
