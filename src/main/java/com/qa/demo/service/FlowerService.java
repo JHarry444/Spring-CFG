@@ -38,6 +38,7 @@ public class FlowerService {
 	public Flower update(Flower flower, long id) {
 		Flower toUpdate = this.repo.findById(id).orElseThrow(() -> new FlowerNotFoundException());
 		
+		toUpdate.setType(flower.getType());
 		toUpdate.setColour(flower.getColour());
 		toUpdate.setHeight(flower.getHeight());
 		toUpdate.setPoisonous(flower.isPoisonous());
