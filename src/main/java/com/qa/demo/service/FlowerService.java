@@ -1,6 +1,7 @@
 package com.qa.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class FlowerService {
 
 	// INSERT INTO flower VALUES (...);
 	public Flower create(Flower flower) {
-		
+//		this.repo.save(flower);
 		return this.repo.save(flower);
 	}
 
@@ -36,12 +37,17 @@ public class FlowerService {
 
 	// UPDATE flower set colour = ...;
 	public Flower update(Flower flower, long id) {
-		Flower toUpdate = this.repo.findById(id).orElseThrow(() -> new FlowerNotFoundException());
+		
+		Optional<Flower> optFlower = this.repo.findById(id);
+		
+		Flower toUpdate = optFlower
+				.orElseThrow(() -> new FlowerNotFoundException());
 		
 		toUpdate.setType(flower.getType());
 		toUpdate.setColour(flower.getColour());
 		toUpdate.setHeight(flower.getHeight());
 		toUpdate.setPoisonous(flower.isPoisonous());
+		toUpdate.setPrice(flower.getPrice());
 		
 		return this.repo.save(toUpdate);
 	}
