@@ -49,8 +49,8 @@ public class FlowerServiceUnitTest {
 	public void testUpdate() {
 		Mockito.when(this.repo.findById(savedFlower.getId())).thenReturn(Optional.of(savedFlower));
 
-		Flower newFlower = new Flower("pier", 5, "white", 0, true);
-		Flower newFlowerWthID = new Flower("pier", 5, "white", 0, true);
+		Flower newFlower = new Flower("piers", 5, "white", 0, true);
+		Flower newFlowerWthID = new Flower(newFlower.getType(), newFlower.getHeight(), newFlower.getColour(), newFlower.getPrice(), newFlower.isPoisonous());
 		newFlowerWthID.setId(savedFlower.getId());
 
 		Mockito.when(this.repo.save(newFlowerWthID)).thenReturn(newFlowerWthID);
