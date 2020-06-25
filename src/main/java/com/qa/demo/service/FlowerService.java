@@ -22,7 +22,7 @@ public class FlowerService {
 	// INSERT INTO flower VALUES (...);
 	public Flower create(Flower flower) {
 //		this.repo.save(flower);
-		return this.repo.save(flower);
+		return null;
 	}
 
 	// SELECT * FROM flower;
