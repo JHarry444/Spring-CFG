@@ -2,6 +2,8 @@ package com.qa.demo.rest;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ import com.qa.demo.service.FlowerService;
 
 @RestController
 public class FlowerController {
-	
+
 	private FlowerService service;
 
 	public FlowerController(FlowerService service) {
@@ -23,28 +25,29 @@ public class FlowerController {
 		this.service = service;
 	}
 
-
 	@PostMapping("/create")
-	public Flower create(@RequestBody  Flower flower) {
-		return this.service.create(flower);
+	public ResponseEntity<Flower> create(@RequestBody Flower flower) {
+		return new ResponseEntity<Flower>(this.service.create(flower), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/read")
-	public List<Flower> read() {
-		return this.service.read();
+	public ResponseEntity<List<Flower>> read() {
+		return new ResponseEntity<List<Flower>>(this.service.read(), HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public Flower update(@PathVariable Long id, @RequestBody Flower flower) {
-		return this.service.update(flower, id);
+	public ResponseEntity<Flower> update(@PathVariable Long id, @RequestBody Flower flower) {
+		return new ResponseEntity<Flower>(this.service.update(flower, id), HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public boolean delete(@PathVariable Long id) {
-		return this.service.delete(id);
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		return (this.service.delete(id) ? new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR) : new ResponseEntity<>(HttpStatus.NO_CONTENT));
+//		if (this.service.delete(id)) {
+//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		} else {
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//		}
 	}
-	
-	
-	
-	
+
 }
