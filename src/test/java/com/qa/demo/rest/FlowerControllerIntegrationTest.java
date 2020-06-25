@@ -43,14 +43,15 @@ public class FlowerControllerIntegrationTest {
 	private FlowerRepo repo;
 
 	private Long id;
+
 	@Before
 	public void init() {
 		this.repo.deleteAll();
-		
+
 		this.flower = new Flower("tulip", 34, "purple", 34.54, false);
-		
+
 		this.savedFlower = this.repo.save(this.flower);
-		
+
 		this.id = this.savedFlower.getId() + 1;
 	}
 
@@ -62,9 +63,9 @@ public class FlowerControllerIntegrationTest {
 
 	@Test
 	public void testCreate() throws Exception {
-		
+
 		this.savedFlower.setId(id);
-		
+
 		MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.post("/flower/create");
 		reqBuilder.contentType(MediaType.APPLICATION_JSON);
 		reqBuilder.accept(MediaType.APPLICATION_JSON);
@@ -86,26 +87,18 @@ public class FlowerControllerIntegrationTest {
 	}
 
 	@Test
-	public void testReadOneSuccess() throws  Exception {
+	public void testReadOneSuccess() throws Exception {
 		this.mockMVC
 				.perform(get("/flower/read/" + this.savedFlower.getId()).contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().json(this.mapper.writeValueAsString(savedFlower)));
 	}
-	
+
 	@Test
 	public void testReadOneFailure() throws Exception {
-		this.mockMVC
-				.perform(get("/flower/read/999999").contentType(MediaType.APPLICATION_JSON)
-						.accept(MediaType.APPLICATION_JSON))
+		this.mockMVC.perform(
+				get("/flower/read/999999").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 
-	
-	
-	
-	
-	
-	
-	
 }
