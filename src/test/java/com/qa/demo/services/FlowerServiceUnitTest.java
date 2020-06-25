@@ -1,6 +1,8 @@
 package com.qa.demo.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -38,11 +40,11 @@ public class FlowerServiceUnitTest {
 
 	@Test
 	public void testCreate() {
-		Mockito.when(this.repo.save(FLOWER)).thenReturn(savedFlower);
+		when(this.repo.save(FLOWER)).thenReturn(savedFlower);
 
 		assertEquals(savedFlower, service.create(FLOWER));
 
-		Mockito.verify(this.repo, Mockito.times(1)).save(FLOWER);
+		verify(this.repo, Mockito.times(1)).save(FLOWER);
 	}
 
 	@Test

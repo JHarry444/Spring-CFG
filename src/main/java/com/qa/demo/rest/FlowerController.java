@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.demo.persistence.domain.Flower;
 import com.qa.demo.service.FlowerService;
 
 @RestController
+@RequestMapping("/flower")
 public class FlowerController {
 
 	private FlowerService service;
@@ -28,6 +30,11 @@ public class FlowerController {
 	@PostMapping("/create")
 	public ResponseEntity<Flower> create(@RequestBody Flower flower) {
 		return new ResponseEntity<Flower>(this.service.create(flower), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/read/{id}")
+	public ResponseEntity<Flower> readOne(@PathVariable Long id) {
+		return ResponseEntity.ok(this.service.read(id));
 	}
 
 	@GetMapping("/read")
