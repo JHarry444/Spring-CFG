@@ -16,6 +16,7 @@ public class Garden {
 
 	private double squareFootage;
 
+	// select * from flower where flower.id = this.id;
 	@OneToMany(mappedBy = "garden") // the name of the field in Flower
 	private List<Flower> flowers;
 

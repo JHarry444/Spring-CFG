@@ -2,6 +2,7 @@ package com.qa.demo.config;
 
 import java.time.LocalTime;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,11 @@ public class AppConfig {
 	@Bean // bean 2
 	public String message2(String message) {
 		return message + "Electric boogaloo";
+	}
+	
+	@Bean 
+	public ModelMapper mapper() {
+		return new ModelMapper();
 	}
 
 }
