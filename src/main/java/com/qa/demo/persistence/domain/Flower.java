@@ -32,7 +32,7 @@ public class Flower {
 	@Column(nullable = false)
 	private boolean poisonous;
 
-	@ManyToOne(targetEntity = Garden.class) // The class it relates to
+	@ManyToOne // The class it relates to
 	private Garden garden;
 	
 	public Flower() { // Entities MUST have a default constructor
